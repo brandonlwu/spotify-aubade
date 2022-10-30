@@ -1,18 +1,31 @@
+import React, { useState, useEffect } from 'react';
+import WebPlayback from './WebPlayback'
+import Login from './Login'
 import './App.css';
+import Playlist from './Playlist';
 
 function App() {
-  const CLIENT_ID = '46cbc5fd21f64887bf6f93e2e22c48d3'
-  const REDIRECT_URI = "http://localhost:3000"
-  const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize"
-  const RESPONSE_TYPE = "token"
 
-    return (
-        <div className="App">
-            <header className="App-header">
-            <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>Login to Spotify</a>
-            </header>
-        </div>
-    );
+  const [token, setToken] = useState('');
+
+  useEffect(() => {
+
+    async function getToken() {
+      const response = await fetch('/auth/token');
+      const json = await response.json();
+      setToken(json.access_token);
+    }
+
+    getToken();
+
+  }, []);
+
+  return (
+    <div className = 'container'>
+        { (token === '') ? <Login/> : <Playlist/>}
+    </div>
+  );
 }
+
 
 export default App;

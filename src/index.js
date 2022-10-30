@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+export const spotifyWhite = require('./assets/images/spotify-white.png')
+export const spotifyBlack = require('./assets/images/spotify-black.png')
+export const images = [spotifyBlack, spotifyWhite]
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
